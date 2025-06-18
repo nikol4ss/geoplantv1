@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Geo Plant - SignUp</title>
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <style>
+        .input-style {
+            width: 100%;
+            padding: 0.50rem 1rem;
+            margin-bottom: 1.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-style:focus {
+            outline: none;
+            border-color: #3e8a28;
+            box-shadow: 0 0 1px #3e8a28aa;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        <img src="{% static 'assets/geoplant.png' %}" alt="Logo Geo Plant" width="90" height="90" />
+
+        <h2 style="text-align:center;">Create Account</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+        <button type="submit">SignUp</button>
+
+    </form>
+</body>
+
+</html>
