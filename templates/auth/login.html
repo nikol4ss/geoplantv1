@@ -4,36 +4,37 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Geo Plant - Login</title>
+    <title>Geo Plant - Fazer Login</title>
     <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
 </head>
 
-<body>
+<style>
+    
+</style>
 
+<body>
     <form method="post">
         <img src="{% static 'assets/geoplant.png' %}" alt="Logo Geo Plant" width="90" height="90" />
 
-        <h2 style="text-align:center;">Welcome to Geo Plant</h2>
+        <h2 style="text-align:center;">Bem-vindo ao Geo Plant</h2>
 
         {% csrf_token %}
         {{ form.as_p }}
 
         {% if form.errors %}
         <div class="error-message">
-            Incorrect username or password.
+            Usuário ou senha incorretos.
         </div>
         {% endif %}
 
         <div class="link">
-            <a href="{% url 'signup' %}">Already have an account? Log in</a>
-            <a href="{% url 'reset_password' %}">Forgot password?</a>
+            <a href="{% url 'signup' %}">Não tem uma conta? Cadastre-se</a>
+            <a href="{% url 'reset_password' %}">Esqueceu a senha?</a>
         </div>
 
-        <button type="submit">log in</button>
-
+        <button type="submit">Entrar</button>
     </form>
-
 </body>
 
 </html>

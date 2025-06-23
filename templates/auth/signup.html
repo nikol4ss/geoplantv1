@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Geo Plant - SignUp</title>
+    <title>Geo Plant - Cadastrar</title>
     <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <style>
@@ -30,13 +30,18 @@
     <form method="post">
         <img src="{% static 'assets/geoplant.png' %}" alt="Logo Geo Plant" width="90" height="90" />
 
-        <h2 style="text-align:center;">Create Account</h2>
+        <h2 style="text-align:center;">Criar Conta</h2>
         {% csrf_token %}
         {{ form.as_p }}
 
-        <a href="{% url 'login' %}">Already have an account? Login</a>
-        <button type="submit">SignUp</button>
+        <!-- {% if form.errors %}
+        <div class="error-message">
+            Ocorreu um erro. Verifique os dados e tente novamente.
+        </div>
+        {% endif %} -->
 
+        <a href="{% url 'login' %}">Já tem uma conta? Faça login</a>
+        <button type="submit">Cadastrar</button>
     </form>
 </body>
 
