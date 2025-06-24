@@ -8,7 +8,6 @@ def signup(request):
             form.save()
             return redirect('login')
     else:
-        print("ERROR")
         form = CustomUserCreationForm()
 
     return render(request, 'auth/signup.html', {'form': form})

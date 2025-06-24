@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/core.css' %}">
+    <title>GeoPlant - Dashboard</title>
+</head>
+
+<body>
+    <aside>
+        <img class="logo" src="{% static 'assets/geoplant_w.png' %}" alt="Logo Geo Plant" width="90" height="90" />
+
+        <a href="{% url 'catalog' %}">
+            <img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
+        <a href="{% url 'create_botanical' %}">
+            <img src="{% static 'svg/register_botanic.svg' %}" alt="registrar" />Registro</a>
+        <a href="#">
+            <img src="{% static 'svg/settings.svg' %}" alt="Configuracoes" />Configurações</a>
+        <a href="{% url 'login' %}">
+            <img src="{% static 'svg/logout.svg' %}" alt="Sair" />Sair</a>
+    </aside>
+
+    <div class="main">
+        <header>
+            <h1>Catálogo Botânico</h1>
+        </header>
+
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do CRUD</th>
+                        <th>Criado em</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1</td>
+                        <td>Produtos</td>
+                        <td>2025-06-23</td>
+                        <td><button>Detalhes</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

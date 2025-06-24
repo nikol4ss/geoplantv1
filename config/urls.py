@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 # from django.shortcuts import redirect // usar para redirecionar o endpoint inicial (login)
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from apps.auth import views
+from django.views.generic import TemplateView
 
 # def redirect_to_login(request):
 #     return redirect('login')
@@ -30,7 +31,7 @@ urlpatterns = [
 
     path('signup/', views.signup, name='signup'),
 
-     path('reset_password/',
+    path('reset_password/',
          auth_views.PasswordResetView.as_view(template_name='auth/password_reset_form.html'),
          name='reset_password'),
 
@@ -45,4 +46,7 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='auth/password_reset_complete.html'),
          name='password_reset_complete'),
+
+    path('catalog/', TemplateView.as_view(template_name='core/catalog.html'), name='catalog'),
+    path('catalog/botanical/register/', include('apps.core.urls'))
 ]

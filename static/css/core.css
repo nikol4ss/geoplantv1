@@ -1,0 +1,130 @@
+ * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
+
+ :root {
+     --color-primary: #316e20;
+     --color-secondary: #2e7d32;
+     --color-background: #d1d5db;
+     --color-link: #19461b;
+     --color-text: #333;
+ }
+
+ body {
+     display: flex;
+     height: 100vh;
+     overflow: hidden;
+ }
+
+ aside {
+     background-color: var(--color-primary);
+     color: var(--color-text);
+     padding: 2rem 1rem;
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+ }
+
+ .logo {
+     display: block;
+     margin: 0 auto;
+ }
+
+ aside a {
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+     color: #ffffff;
+     text-decoration: none;
+     padding: 0.6rem 1rem;
+     border-radius: 3px;
+     transition: background 0.3s;
+ }
+
+ aside a:hover {
+     background-color: var(--color-link);
+ }
+
+ .main {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+ }
+
+ header {
+     background-color: #fff;
+     padding: 1rem 2rem;
+     border-bottom: 1px solid #e5e7eb;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ header h1 {
+     font-size: 1.5rem;
+     color: #111827;
+ }
+
+ .btn-add {
+     background-color: #3e8a2888;
+     color: white;
+     border: none;
+     padding: 0.6rem 1.2rem;
+     font-size: 1rem;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ .btn-add:hover {
+     background-color: #1e40af;
+ }
+
+ .content {
+     padding: 2rem;
+     overflow-y: auto;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 1.5rem;
+     background-color: white;
+     border-radius: 8px;
+     overflow: hidden;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+ }
+
+ th,
+ td {
+     padding: 1rem;
+     text-align: left;
+     border-bottom: 1px solid #f3f4f6;
+ }
+
+ th {
+     background-color: #f9fafb;
+     font-weight: 600;
+ }
+
+ tr:hover {
+     background-color: #f1f5f9;
+ }
+
+ @media (max-width: 768px) {
+     aside {
+         display: none;
+     }
+
+     .main {
+         width: 100%;
+     }
+
+     header {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 1rem;
+     }
+ }

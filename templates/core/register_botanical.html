@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/core.css' %}">
+    <title>GeoPlant - Ficha Botânica</title>
+</head>
+
+<style>
+    .content form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 3px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    section {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    section h3 {
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .col-md-4,
+    .col-md-6,
+    .col-12 {
+        flex: 1 1 100%;
+    }
+
+    .col-md-4 {
+        max-width: calc(33.333% - 20px);
+    }
+
+    .col-md-6 {
+        max-width: calc(50% - 20px);
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 4px #3e8a2888;
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    button.btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        background-color: var(--color-primary);
+        color: white;
+        transition: background-color 0.2s;
+    }
+
+    button.btn:hover {
+        background-color: var(--color-link);
+    }
+</style>
+
+<body>
+    <aside>
+        <img class="logo" src="{% static 'assets/geoplant_w.png' %}" alt="Logo Geo Plant" width="90" height="90" />
+        <a href="{% url 'catalog' %}">
+            <img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
+        <a href="{% url 'create_botanical' %}">
+            <img src="{% static 'svg/register_botanic.svg' %}" alt="registrar" />Registro</a>
+        <a href="#">
+            <img src="{% static 'svg/settings.svg' %}" alt="Configuracoes" />Configurações</a>
+        <a href="{% url 'login' %}">
+            <img src="{% static 'svg/logout.svg' %}" alt="Sair" />Sair</a>
+    </aside>
+    <div class="main">
+        <header>
+            <h1>Ficha Botânica</h1>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-success">Fazer Registro</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <section class="info"=>
+                    <h3><img src="{% static 'svg/info.svg' %}" width="30px" alt="Info" />Identificação
+                        Botânica</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nome Binomial</label>
+                            {{ form.binomial }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nome Comum</label>
+                            {{ form.common_name }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Família Botânica</label>
+                            {{ form.botanical_family }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Gênero</label>
+                            {{ form.genus }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Espécie</label>
+                            {{ form.species }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Autor</label>
+                            {{ form.author }}
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5">
+                    <h3 class="mb-3"><img src="{% static 'svg/info.svg' %}" width="30px" alt="Info" />Morfologia</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Altura</label>
+                            {{ form.height }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Diâmetro</label>
+                            {{ form.diameter }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Caule</label>
+                            {{ form.stem_type }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Folha</label>
+                            {{ form.leaf_type }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Flor</label>
+                            {{ form.flower_type }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Período de Floração</label>
+                            {{ form.flowering_period }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Fruto</label>
+                            {{ form.fruit_type }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Período de Frutificação</label>
+                            {{ form.fruiting_period }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Observações Morfológicas</label>
+                            {{ form.morphological_observations }}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 🏞️ Dados Ambientais -->
+                <section class="mb-5">
+                    <h3 class="mb-3">🏞️ Dados Ambientais</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Solo</label>
+                            {{ form.soil_type }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">pH do Solo</label>
+                            {{ form.soil_pH }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Nível de Umidade</label>
+                            {{ form.moisture }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Iluminação</label>
+                            {{ form.lighting }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Temperatura</label>
+                            {{ form.temperature }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Clima Predominante</label>
+                            {{ form.climate }}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 🌱 Cultivo -->
+                <section class="mb-5">
+                    <h3 class="mb-3">🌱 Cultivo</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Requisito de Água</label>
+                            {{ form.water_requirement }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Frequência de Rega</label>
+                            {{ form.watering_frequency }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo de Fertilização</label>
+                            {{ form.fertilization_type }}
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center">
+                            <div class="form-check">
+                                {{ form.need_for_pruning }}
+                                <label class="form-check-label">Necessita Poda</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Susceptibilidade</label>
+                            {{ form.susceptibility }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Notas de Cultivo</label>
+                            {{ form.cultivation_notes }}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 📍 Localização -->
+                <section class="mb-5">
+                    <h3 class="mb-3">📍 Localização</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">País</label>
+                            {{ form.country }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Estado/Província</label>
+                            {{ form.state_province }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Cidade</label>
+                            {{ form.city }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Localização Específica</label>
+                            {{ form.specific_location }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Latitude</label>
+                            {{ form.latitude }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Longitude</label>
+                            {{ form.longitude }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Altitude (m)</label>
+                            {{ form.altitude_meters }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Bioma</label>
+                            {{ form.biome }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Ecossistema</label>
+                            {{ form.ecosystem }}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 📅 Datas -->
+                <section class="mb-5">
+                    <h3 class="mb-3">📅 Datas</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Data de Registro</label>
+                            {{ form.registration_date }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Data de Plantio</label>
+                            {{ form.planting_date }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Data de Coleta</label>
+                            {{ form.collection_date }}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 🌎 Origem e Coleta -->
+                <section class="mb-5">
+                    <h3 class="mb-3">🌎 Origem e Coleta</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Origem</label>
+                            {{ form.origin }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Número da Coleta</label>
+                            {{ form.collection_number }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Registrado Por</label>
+                            {{ form.registered_by }}
+                        </div>
+                    </div>
+                </section>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
