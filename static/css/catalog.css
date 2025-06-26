@@ -1,0 +1,83 @@
+   table.no-vertical-lines {
+       border-collapse: collapse;
+       border: 1px solid #ccc;
+       width: 100%;
+   }
+
+   table.no-vertical-lines th,
+   table.no-vertical-lines td {
+       border-left: none;
+       border-right: none;
+       padding: 10px;
+       text-align: left;
+   }
+
+   .crud {
+       display: block;
+       margin: 0 auto;
+       cursor: pointer;
+       width: 20px;
+       height: 20px;
+   }
+
+   /* Botão visual para "Ver no mapa" */
+   a.map-link {
+       color: var(--color-primary);
+       text-decoration: none;
+       font-weight: 600;
+       font-size: 0.9rem;
+       margin-left: 8px;
+   }
+
+   a.map-link:hover {
+       text-decoration: underline;
+   }
+
+   /* Responsividade básica para tabela */
+   @media (max-width: 768px) {
+
+       table.no-vertical-lines,
+       thead,
+       tbody,
+       th,
+       td,
+       tr {
+           display: block;
+       }
+
+       thead tr {
+           display: none;
+       }
+
+       tr {
+           margin-bottom: 1rem;
+           border: 1px solid #ccc;
+           border-radius: 6px;
+           padding: 10px;
+       }
+
+       td {
+           padding-left: 50%;
+           position: relative;
+           border: none;
+           border-bottom: 1px solid #eee;
+       }
+
+       td:last-child {
+           border-bottom: 0;
+       }
+
+       td::before {
+           position: absolute;
+           top: 10px;
+           left: 10px;
+           width: 45%;
+           white-space: nowrap;
+           font-weight: 600;
+           content: attr(data-label);
+       }
+
+       .crud {
+           margin: 5px 0;
+       }
+   }

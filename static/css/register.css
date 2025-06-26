@@ -1,0 +1,101 @@
+ .content form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        section h3 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        header {
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col-md-4,
+        .col-md-6,
+        .col-12 {
+            flex: 1 1 100%;
+        }
+
+        .col-md-4 {
+            max-width: calc(33.333% - 20px);
+        }
+
+        .col-md-6 {
+            max-width: calc(50% - 20px);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 3px #3e8a2888;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button.btn {
+            padding: 10px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: var(--color-primary);
+            color: white;
+            transition: background-color 0.2s;
+        }
+
+        button.btn:hover {
+            background-color: var(--color-link);
+        }
+
+        .checkbox {
+            display: flex;
+            width: 20px;
+        }
+
+        .create {
+            text-align: center;
+            margin-top: 20px;
+        }
