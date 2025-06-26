@@ -5,24 +5,105 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
-    <link rel="stylesheet" href="{% static '/css/global.css' %}">
-    <link rel="stylesheet" href="{% static '/css/core.css' %}">
-    <title>GeoPlant - Dashboard</title>
+    <title>GeoPlant - Catálogo</title>
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <style>
+        table.no-vertical-lines {
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        table.no-vertical-lines th,
+        table.no-vertical-lines td {
+            border-left: none;
+            border-right: none;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .crud {
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Botão visual para "Ver no mapa" */
+        a.map-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+
+        a.map-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade básica para tabela */
+        @media (max-width: 768px) {
+
+            table.no-vertical-lines,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                padding: 10px;
+            }
+
+            td {
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            td:last-child {
+                border-bottom: 0;
+            }
+
+            td::before {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 45%;
+                white-space: nowrap;
+                font-weight: 600;
+                content: attr(data-label);
+            }
+
+            .crud {
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <aside>
         <img class="logo" src="{% static 'assets/geoplant_w.png' %}" alt="Logo Geo Plant" width="90" height="90" />
-
-        <a href="{% url 'catalog' %}">
-            <img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
-        <a href="{% url 'create_botanical' %}">
-            <img src="{% static 'svg/register_botanic.svg' %}" alt="registrar" />Registro</a>
-        <a href="#">
-            <img src="{% static 'svg/settings.svg' %}" alt="Configuracoes" />Configurações</a>
-        <a href="{% url 'login' %}">
-            <img src="{% static 'svg/logout.svg' %}" alt="Sair" />Sair</a>
+        <a href="{% url 'catalog' %}"><img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
+        <a href="{% url 'create_botanical' %}"><img src="{% static 'svg/register_botanic.svg' %}"
+                alt="registrar" />Registro</a>
+        <a href="#"><img src="{% static 'svg/settings.svg' %}" alt="Configurações" />Configurações</a>
+        <a href="{% url 'login' %}"><img src="{% static 'svg/logout.svg' %}" alt="Sair" />Sair</a>
     </aside>
 
     <div class="main">
@@ -31,27 +112,61 @@
         </header>
 
         <div class="content">
-            <table>
+            <table class="no-vertical-lines" border="1" cellpadding="0" cellspacing="0" role="grid"
+                aria-label="Catálogo botânico">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome do CRUD</th>
-                        <th>Criado em</th>
-                        <th>Status</th>
+                        <th>Binomial</th>
+                        <th>Nome Popular</th>
+                        <th>Registrado por</th>
+                        <th>Localização</th>
+                        <th aria-label="Excluir"></th>
+                        <th aria-label="Editar"></th>
+                        <th aria-label="Visualizar"></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for bot in botanicals %}
                     <tr>
-                        <td>#1</td>
-                        <td>Produtos</td>
-                        <td>2025-06-23</td>
-                        <td><button>Detalhes</button></td>
+                        <td data-label="Binomial">{{ bot.binomial }}</td>
+                        <td data-label="Nome Popular">{{ bot.common_name }}</td>
+                        <td data-label="Registrado por">{{ bot.registered_by }}</td>
+                        <td data-label="Localização">
+                            {{ bot.city }}, {{ bot.state_province }}
+                            <a href="https://www.google.com/maps?q={{ bot.latitude }},{{ bot.longitude }}"
+                                target="_blank" rel="noopener" class="map-link">
+                                Ver no Mapa
+                            </a>
+                        </td>
+                        <td data-label="Excluir">
+                            <form method="POST" action="{% url 'delete' bot.id %}">
+                                {% csrf_token %}
+                                <button type="submit" style="background:none; border:none; padding:0;">
+                                    <img class="crud" src="{% static 'svg/delete.svg' %}" alt="Excluir" />
+                                </button>
+                            </form>
+                        </td>
+                        <td data-label="Editar">
+                            <a href="{% url 'update' bot.id %}">
+                                <img class="crud" src="{% static 'svg/edit.svg' %}" alt="Editar" />
+                            </a>
+                        </td>
+                        <td data-label="Visualizar">
+                            <a href="{% url 'view' bot.id %}">
+                                <img class="crud" src="{% static 'svg/eye.svg' %}" alt="Visualizar" />
+                            </a>
+                        </td>
                     </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding: 1rem;">
+                            Nenhuma planta cadastrada ainda.
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-
 </body>
-
 </html>

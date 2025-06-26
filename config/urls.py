@@ -15,14 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib.auth import views as auth_views
-# from django.shortcuts import redirect // usar para redirecionar o endpoint inicial (login)
+from django.shortcuts import redirect
 from django.contrib import admin
 from django.urls import path, include
 from apps.auth import views
-from django.views.generic import TemplateView
 
-# def redirect_to_login(request):
-#     return redirect('login')
+def redirect_to_login():
+    return redirect('login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -47,6 +46,7 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name='auth/password_reset_complete.html'),
          name='password_reset_complete'),
 
-    path('catalog/', TemplateView.as_view(template_name='core/catalog.html'), name='catalog'),
-    path('catalog/botanical/register/', include('apps.core.urls'))
+    path('', include('apps.core.urls')),
 ]
+
+

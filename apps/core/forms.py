@@ -14,7 +14,6 @@ class BotanicalForm(forms.ModelForm):
             'species': forms.TextInput(attrs={'class': 'form-control'}),
             'author': forms.TextInput(attrs={'class': 'form-control'}),
 
-            # Morfologia
             'height': forms.NumberInput(attrs={'class': 'form-control', 'step': 'any'}),
             'diameter': forms.NumberInput(attrs={'class': 'form-control', 'step': 'any'}),
             'stem_type': forms.Select(attrs={'class': 'form-control'}),
@@ -25,7 +24,6 @@ class BotanicalForm(forms.ModelForm):
             'fruiting_period': forms.Select(attrs={'class': 'form-control'}),
             'morphological_observations': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 
-            # Dados ambientais
             'soil_type': forms.Select(attrs={'class': 'form-control'}),
             'soil_pH': forms.NumberInput(attrs={'class': 'form-control', 'step': 'any'}),
             'moisture': forms.Select(attrs={'class': 'form-control'}),
@@ -33,15 +31,13 @@ class BotanicalForm(forms.ModelForm):
             'temperature': forms.NumberInput(attrs={'class': 'form-control', 'step': 'any'}),
             'climate': forms.Select(attrs={'class': 'form-control'}),
 
-            # Cultivo
             'water_requirement': forms.Select(attrs={'class': 'form-control'}),
             'watering_frequency': forms.Select(attrs={'class': 'form-control'}),
             'fertilization_type': forms.Select(attrs={'class': 'form-control'}),
-            'need_for_pruning': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+
             'susceptibility': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'cultivation_notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 
-            # Localização
             'country': forms.TextInput(attrs={'class': 'form-control'}),
             'state_province': forms.TextInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
@@ -52,12 +48,17 @@ class BotanicalForm(forms.ModelForm):
             'biome': forms.TextInput(attrs={'class': 'form-control'}),
             'ecosystem': forms.TextInput(attrs={'class': 'form-control'}),
 
-            # Datas
+            'registration_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'planting_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'collection_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
 
-            # Origem
             'origin': forms.TextInput(attrs={'class': 'form-control'}),
             'collection_number': forms.TextInput(attrs={'class': 'form-control'}),
             'registered_by': forms.TextInput(attrs={'class': 'form-control'}),
+
+            'general_image': forms.ImageField(),
+            'stem_image': forms.ImageField(),
+            'leaf_image': forms.ImageField(),
+            'flower_image': forms.ImageField(),
+            'fruit_image': forms.ImageField()
         }

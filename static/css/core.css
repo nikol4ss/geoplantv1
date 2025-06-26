@@ -54,6 +54,7 @@
  }
 
  header {
+    
      background-color: #fff;
      padding: 1rem 2rem;
      border-bottom: 1px solid #e5e7eb;
@@ -102,11 +103,13 @@
      padding: 1rem;
      text-align: left;
      border-bottom: 1px solid #f3f4f6;
+
  }
 
  th {
      background-color: #f9fafb;
      font-weight: 600;
+     border-right: none;
  }
 
  tr:hover {

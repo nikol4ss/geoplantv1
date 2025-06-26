@@ -1,0 +1,385 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ficha Botânica - {{ plant.binomial }}</title>
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <style>
+        /* Root e Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-primary: #316e20;
+            --color-secondary: #2e7d32;
+            --color-background: #d1d5db;
+            --color-link: #19461b;
+            --color-text: #333;
+            --radius: 1px;
+            --gap: 1rem;
+        }
+
+        /* Body e Layout */
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--color-background);
+            color: var(--color-text);
+        }
+
+        aside {
+            background-color: var(--color-primary);
+            color: #fff;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
+            min-width: 180px;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        aside a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.6rem 1rem;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+
+        }
+
+        aside a:hover {
+            background-color: var(--color-link);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            overflow-y: auto;
+        }
+
+        header {
+            background-color: white;
+            font-size: 1.5rem;
+            color: #111827;
+            font-weight: 700;
+
+        }
+
+        .content {
+            padding: 2rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Cards */
+        section.card {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.07);
+        }
+
+        section.card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3rem;
+            font-size: 1.3rem;
+        }
+
+        section.card h3 img {
+            width: 22px;
+            filter: brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(341%) hue-rotate(75deg) brightness(86%) contrast(83%);
+        }
+
+        /* Fields Grid */
+        .fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem 2rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+            user-select: none;
+        }
+
+        .field span {
+            font-size: 1rem;
+            color: var(--color-text);
+            word-break: break-word;
+        }
+
+        .field[style*="grid-column: span 2"] {
+            grid-column: span 2;
+        }
+
+        /* Imagens */
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .images-grid figure {
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            padding: 0.4rem;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            user-select: none;
+        }
+
+        .images-grid figure img,
+        .images-grid>img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            object-fit: contain;
+            max-height: 100px;
+            margin-bottom: 0.4rem;
+        }
+
+        /* Scrollbar */
+        main::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        main::-webkit-scrollbar-track {
+            background: var(--color-background);
+        }
+
+        main::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 4px;
+        }
+
+        /* Responsividade Básica */
+        @media (max-width: 768px) {
+            aside {
+                display: none;
+            }
+
+            main {
+                width: 100%;
+            }
+
+            header {
+                font-size: 1.3rem;
+                padding: 1rem;
+            }
+
+            .fields {
+                grid-template-columns: 1fr !important;
+            }
+
+            .field[style*="grid-column: span 2"] {
+                grid-column: span 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <img class="logo" src="{% static 'assets/geoplant_w.png' %}" alt="GeoPlant" />
+        <a href="{% url 'catalog' %}"><img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
+        <a href="{% url 'create_botanical' %}"><img src="{% static 'svg/register_botanic.svg' %}"
+                alt="registrar" />Registro</a>
+        <a href="#"><img src="{% static 'svg/settings.svg' %}" alt="configurações" />Configurações</a>
+        <a href="{% url 'login' %}"><img src="{% static 'svg/logout.svg' %}" alt="sair" />Sair</a>
+    </aside>
+
+    <main>
+        <header>Ficha Botânica - {{ plant.binomial }}</header>
+        <div class="content">
+
+            <!-- Identificação Botânica -->
+            <section class="card">
+                <h3><img src="{% static 'svg/florest.svg' %}" alt="Identificação" />Identificação Botânica</h3>
+                <div class="fields">
+                    <div class="field"><label>Nome Binomial</label><span>{{ plant.binomial }}</span></div>
+                    <div class="field"><label>Nome Comum</label><span>{{ plant.common_name }}</span></div>
+                    <div class="field"><label>Família Botânica</label><span>{{ plant.botanical_family }}</span></div>
+                    <div class="field"><label>Gênero</label><span>{{ plant.genus }}</span></div>
+                    <div class="field"><label>Espécie</label><span>{{ plant.species }}</span></div>
+                    <div class="field"><label>Autor</label><span>{{ plant.author }}</span></div>
+                </div>
+            </section>
+
+            <!-- Morfologia -->
+            <section class="card">
+                <h3><img src="{% static 'svg/eco.svg' %}" alt="Morfologia" />Morfologia</h3>
+                <div class="fields">
+                    <div class="field"><label>Altura</label><span>{{ plant.height }}</span></div>
+                    <div class="field"><label>Diâmetro</label><span>{{ plant.diameter }}</span></div>
+                    <div class="field"><label>Tipo de Caule</label><span>{{ plant.stem_type }}</span></div>
+                    <div class="field"><label>Tipo de Folha</label><span>{{ plant.leaf_type }}</span></div>
+                    <div class="field"><label>Tipo de Flor</label><span>{{ plant.flower_type }}</span></div>
+                    <div class="field"><label>Período de Floração</label><span>{{ plant.flowering_period }}</span></div>
+                    <div class="field"><label>Tipo de Fruto</label><span>{{ plant.fruit_type }}</span></div>
+                    <div class="field"><label>Período de Frutificação</label><span>{{ plant.fruiting_period }}</span>
+                    </div>
+                    <div class="field" style="grid-column: span 2;">
+                        <label>Observações Morfológicas</label>
+                        <span>{{ plant.morphological_observations }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dados Ambientais -->
+            <section class="card">
+                <h3><img src="{% static 'svg/climate.svg' %}" alt="Ambientais" />Dados Ambientais</h3>
+                <div class="fields">
+                    <div class="field"><label>Tipo de Solo</label><span>{{ plant.soil_type }}</span></div>
+                    <div class="field"><label>pH do Solo</label><span>{{ plant.soil_pH }}</span></div>
+                    <div class="field"><label>Nível de Umidade</label><span>{{ plant.moisture }}</span></div>
+                    <div class="field"><label>Iluminação</label><span>{{ plant.lighting }}</span></div>
+                    <div class="field"><label>Temperatura</label><span>{{ plant.temperature }}</span></div>
+                    <div class="field"><label>Clima Predominante</label><span>{{ plant.climate }}</span></div>
+                </div>
+            </section>
+
+            <!-- Cultivo -->
+            <section class="card">
+                <h3><img src="{% static 'svg/cultivo.svg' %}" alt="Cultivo" />Cultivo</h3>
+                <div class="fields">
+                    <div class="field"><label>Requisito de Água</label><span>{{ plant.water_requirement }}</span></div>
+                    <div class="field"><label>Frequência de Rega</label><span>{{ plant.watering_frequency }}</span>
+                    </div>
+                    <div class="field"><label>Tipo de Fertilização</label><span>{{ plant.fertilization_type }}</span>
+                    </div>
+                    <div class="field" style="grid-column: span 2;">
+                        <label>Sustentabilidade</label>
+                        <span>{{ plant.susceptibility }}</span>
+                    </div>
+                    <div class="field" style="grid-column: span 2;">
+                        <label>Notas de Cultivo</label>
+                        <span>{{ plant.cultivation_notes }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Localização -->
+            <section class="card">
+                <h3><img src="{% static 'svg/loc.svg' %}" alt="Localização" />Localização</h3>
+                <div class="fields">
+                    <div class="field"><label>País</label><span>{{ plant.country }}</span></div>
+                    <div class="field"><label>Estado/Província</label><span>{{ plant.state_province }}</span></div>
+                    <div class="field"><label>Cidade</label><span>{{ plant.city }}</span></div>
+                    <div class="field" style="grid-column: span 2;">
+                        <label>Localização Específica</label>
+                        <span>{{ plant.specific_location }}</span>
+                    </div>
+                    <div class="field"><label>Latitude</label><span>{{ plant.latitude }}</span></div>
+                    <div class="field"><label>Longitude</label><span>{{ plant.longitude }}</span></div>
+                    <div class="field"><label>Altitude (m)</label><span>{{ plant.altitude_meters }}</span></div>
+                    <div class="field"><label>Bioma</label><span>{{ plant.biome }}</span></div>
+                    <div class="field"><label>Ecossistema</label><span>{{ plant.ecosystem }}</span></div>
+                </div>
+            </section>
+
+            <!-- Datas -->
+            <section class="card">
+                <h3><img src="{% static 'svg/calendar.svg' %}" alt="Datas" />Datas</h3>
+                <div class="fields">
+                    <div class="field"><label>Data de Registro</label><span>{{ plant.registration_date }}</span></div>
+                    <div class="field"><label>Data de Plantio</label><span>{{ plant.planting_date }}</span></div>
+                    <div class="field"><label>Data de Coleta</label><span>{{ plant.collection_date }}</span></div>
+                </div>
+            </section>
+
+            <!-- Origem e Coleta -->
+            <section class="card">
+                <h3><img src="{% static 'svg/globe.svg' %}" alt="Origem" />Origem e Coleta</h3>
+                <div class="fields">
+                    <div class="field"><label>Origem</label><span>{{ plant.origin }}</span></div>
+                    <div class="field"><label>Número da Coleta</label><span>{{ plant.collection_number }}</span></div>
+                    <div class="field" style="grid-column: span 2;">
+                        <label>Registrado Por</label>
+                        <span>{{ plant.registered_by }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Imagens -->
+            <section class="card">
+                <h3><img src="{% static 'svg/photo.svg' %}" alt="Imagens" />Imagens</h3>
+                <div class="images-grid">
+                    {% if plant.stem_image %}
+                    <figure>
+                        <img src="{{ plant.general_image.url }}" alt="Caule" />
+                        <figcaption>Foto</figcaption>
+                    </figure>
+                    {% endif %}
+                    {% if plant.stem_image %}
+                    <figure>
+                        <img src="{{ plant.stem_image.url }}" alt="Caule" />
+                        <figcaption>Caule</figcaption>
+                    </figure>
+                    {% endif %}
+                    {% if plant.leaf_image %}
+                    <figure>
+                        <img src="{{ plant.leaf_image.url }}" alt="Folha" />
+                        <figcaption>Folha</figcaption>
+                    </figure>
+                    {% endif %}
+                    {% if plant.flower_image %}
+                    <figure>
+                        <img src="{{ plant.flower_image.url }}" alt="Flor" />
+                        <figcaption>Flor</figcaption>
+                    </figure>
+                    {% endif %}
+                    {% if plant.fruit_image %}
+                    <figure>
+                        <img src="{{ plant.fruit_image.url }}" alt="Fruto" />
+                        <figcaption>Fruto</figcaption>
+                    </figure>
+                    {% endif %}
+                </div>
+            </section>
+
+        </div>
+    </main>
+</body>
+
+</html>

@@ -14,7 +14,7 @@ class StemType(models.TextChoices):
     SARMENTOUS = 'Sarmentoso', 'Caule Sarmentoso'
     WOODY = 'Lenhoso', 'Caule Lenhoso'
     HERBACEOUS = 'Herbáceo', 'Caule Herbáceo'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class LeafType(models.TextChoices):
     SIMPLE = 'Simples', 'Folha Simples'
@@ -28,13 +28,13 @@ class LeafType(models.TextChoices):
     SCALE_LIKE = 'Escamosa', 'Folha Escamosa'
     SESSILE = 'Sésil', 'Folha Sésil'
     PETIOLED = 'Peciolada', 'Folha Peciolada'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class FlowerType(models.TextChoices):
-    MALE = 'M', 'Masculino'
-    FEMALE = 'F', 'Feminino'
-    HERMAPHRODITE = 'H', 'Hermafrodita'
-    UNKNOWN = 'U', 'Desconhecido'
+    MALE = 'Masculino', 'Masculino'
+    FEMALE = 'Feminino', 'Feminino'
+    HERMAPHRODITE = 'Hemafrodita', 'Hermafrodita'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class FloweringPeriod(models.TextChoices):
     SPRING = 'Primavera', 'Primavera'
@@ -44,7 +44,7 @@ class FloweringPeriod(models.TextChoices):
     ALL_YEAR = 'O ano todo', 'O ano todo'
     RAINY_SEASON = 'Estação chuvosa', 'Estação chuvosa'
     DRY_SEASON = 'Estação seca', 'Estação seca'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class FruitType(models.TextChoices):
     BERRY = 'Baga', 'Baga'
@@ -55,7 +55,7 @@ class FruitType(models.TextChoices):
     NUCUA = 'Núcua', 'Núcua'
     ACHENE = 'Aquênio', 'Aquênio'
     NUT = 'Noz', 'Noz'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class FruitingPeriod(models.TextChoices):
     SPRING = 'Primavera', 'Primavera'
@@ -65,7 +65,7 @@ class FruitingPeriod(models.TextChoices):
     ALL_YEAR = 'O ano todo', 'O ano todo'
     RAINY_SEASON = 'Estação chuvosa', 'Estação chuvosa'
     DRY_SEASON = 'Estação seca', 'Estação seca'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class SoilType(models.TextChoices):
     SANDY = 'Arenoso', 'Solo Arenoso'
@@ -75,19 +75,19 @@ class SoilType(models.TextChoices):
     PEATY = 'Turfoso', 'Solo Turfoso'
     CHALKY = 'Calcário', 'Solo Calcário'
     SALINE = 'Salino', 'Solo Salino'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class MoistureLevel(models.TextChoices):
     LOW = 'Baixo', 'Baixo'
     MEDIUM = 'Médio', 'Médio'
     HIGH = 'Alto', 'Alto'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class LightExposure(models.TextChoices):
     FULL_SUN = 'Sol pleno', 'Sol pleno'
     PARTIAL_SHADE = 'Meia sombra', 'Meia sombra'
     SHADE = 'Sombra', 'Sombra'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class PredominantClimate(models.TextChoices):
     TROPICAL = 'Tropical', 'Tropical'
@@ -96,27 +96,27 @@ class PredominantClimate(models.TextChoices):
     ARID = 'Árido', 'Árido'
     MEDITERRANEAN = 'Mediterrâneo', 'Mediterrâneo'
     POLAR = 'Polar', 'Polar'
-    UNKNOWN = 'U', 'Desconhecido'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class WaterRequirement(models.TextChoices):
-    LOW = 'B', 'Baixa'
-    MODERATE = 'M', 'Moderada'
-    HIGH = 'A', 'Alta'
-    UNKNOWN = 'U', 'Desconhecido'
+    LOW = 'Baixa', 'Baixa'
+    MODERATE = 'Moderada', 'Moderada'
+    HIGH = 'Alta', 'Alta'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class WateringFrequency(models.TextChoices):
-    DAILY = 'D', 'Diária'
-    TWICE_A_WEEK = '2', 'Duas vezes por semana'
-    WEEKLY = 'S', 'Semanal'
-    BIWEEKLY = 'Q', 'Quinzenal'
-    MONTHLY = 'M', 'Mensal'
-    UNKNOWN = 'U', 'Desconhecido'
+    DAILY = 'Diária', 'Diária'
+    TWICE_A_WEEK = 'Duas vezes por semana', 'Duas vezes por semana'
+    WEEKLY = 'Semanal', 'Semanal'
+    BIWEEKLY = 'Quinzenal', 'Quinzenal'
+    MONTHLY = 'Mensal', 'Mensal'
+    UNKNOWN = 'Desconhecido', 'Desconhecido'
 
 class FertilizationType(models.TextChoices):
-    ORGANIC = 'O', 'Orgânica'
-    CHEMICAL = 'Q', 'Química'
-    FOLIAR = 'F', 'Foliar'
-    NONE = 'N', 'Nenhuma'
+    ORGANIC = 'Orgânica', 'Orgânica'
+    CHEMICAL = 'Química', 'Química'
+    FOLIAR = 'Foliar', 'Foliar'
+    NONE = 'Nenhuma', 'Nenhuma'
 
 class BotanicalRegister(models.Model):
     # Botanical Identification
@@ -147,9 +147,9 @@ class BotanicalRegister(models.Model):
     climate = models.CharField(max_length=MAX_LENGHT, choices=PredominantClimate.choices, default=PredominantClimate.UNKNOWN)
 
     # Cultivation
-    water_requirement = models.CharField(max_length=1, choices=WaterRequirement.choices, default=WaterRequirement.UNKNOWN)
-    watering_frequency = models.CharField(max_length=1, choices=WateringFrequency.choices, default=WateringFrequency.UNKNOWN)
-    fertilization_type = models.CharField(max_length=1, choices=FertilizationType.choices, default=FertilizationType.NONE)
+    water_requirement = models.CharField(max_length=MAX_LENGHT, choices=WaterRequirement.choices, default=WaterRequirement.UNKNOWN)
+    watering_frequency = models.CharField(max_length=MAX_LENGHT, choices=WateringFrequency.choices, default=WateringFrequency.UNKNOWN)
+    fertilization_type = models.CharField(max_length=MAX_LENGHT, choices=FertilizationType.choices, default=FertilizationType.NONE)
     need_for_pruning = models.BooleanField(default=False)
     susceptibility = models.TextField(blank=True, null=True)
     cultivation_notes = models.TextField(blank=True, null=True)
@@ -165,22 +165,19 @@ class BotanicalRegister(models.Model):
     biome = models.CharField(max_length=100, blank=True, null=True)
     ecosystem = models.CharField(max_length=150, blank=True, null=True)
 
-    # Dates
     registration_date = models.DateField(auto_now_add=True)
     planting_date = models.DateField(blank=True, null=True)
     collection_date = models.DateField(blank=True, null=True)
 
-    # Origin and collection
     origin = models.CharField(max_length=100, blank=True, null=True)
     collection_number = models.CharField(max_length=100, blank=True, null=True)
     registered_by = models.CharField(max_length=150)
 
-    # Photograpy - Estudar para aplicar
-    # photo_whole_plant = models.ImageField(upload_to='plants/photos/', blank=True, null=True)
-    # photo_leaf = models.ImageField(upload_to='plants/photos/', blank=True, null=True)
-    # photo_flower = models.ImageField(upload_to='plants/photos/', blank=True, null=True)
-    # photo_fruit = models.ImageField(upload_to='plants/photos/', blank=True, null=True)
-    # photo_habitat = models.ImageField(upload_to='plants/photos/', blank=True, null=True)
+    general_image = models.ImageField(upload_to='plants/general/', null=True, blank=True)
+    stem_image = models.ImageField(upload_to='plants/stem/', null=True, blank=True)
+    leaf_image = models.ImageField(upload_to='plants/leaf/', null=True, blank=True)
+    flower_image = models.ImageField(upload_to='plants/flower/', null=True, blank=True)
+    fruit_image = models.ImageField(upload_to='plants/fruit/', null=True, blank=True)
 
     def __str__(self):
         return f'{self.binomial} ({self.common_name})'

@@ -5,128 +5,137 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
-    <link rel="stylesheet" href="{% static '/css/global.css' %}">
-    <link rel="stylesheet" href="{% static '/css/core.css' %}">
     <title>GeoPlant - Ficha Botânica</title>
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" />
+    <style>
+        .content form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        section h3 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        header {
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col-md-4,
+        .col-md-6,
+        .col-12 {
+            flex: 1 1 100%;
+        }
+
+        .col-md-4 {
+            max-width: calc(33.333% - 20px);
+        }
+
+        .col-md-6 {
+            max-width: calc(50% - 20px);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 3px #3e8a2888;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button.btn {
+            padding: 10px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: var(--color-primary);
+            color: white;
+            transition: background-color 0.2s;
+        }
+
+        button.btn:hover {
+            background-color: var(--color-link);
+        }
+
+        .checkbox {
+            display: flex;
+            width: 20px;
+        }
+
+        .create {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-
-<style>
-    .content form {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 3px;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-    }
-
-    section {
-        margin-bottom: 40px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    section h3 {
-        font-size: 1.4rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .col-md-4,
-    .col-md-6,
-    .col-12 {
-        flex: 1 1 100%;
-    }
-
-    .col-md-4 {
-        max-width: calc(33.333% - 20px);
-    }
-
-    .col-md-6 {
-        max-width: calc(50% - 20px);
-    }
-
-    .form-label {
-        display: block;
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-
-    input,
-    select,
-    textarea {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        font-size: 1rem;
-        box-sizing: border-box;
-    }
-
-    input:focus {
-        outline: none;
-        border-color: var(--color-primary);
-        box-shadow: 0 0 4px #3e8a2888;
-    }
-
-    .form-check {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    button.btn {
-        padding: 10px 25px;
-        font-size: 1rem;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        background-color: var(--color-primary);
-        color: white;
-        transition: background-color 0.2s;
-    }
-
-    button.btn:hover {
-        background-color: var(--color-link);
-    }
-</style>
 
 <body>
     <aside>
         <img class="logo" src="{% static 'assets/geoplant_w.png' %}" alt="Logo Geo Plant" width="90" height="90" />
-        <a href="{% url 'catalog' %}">
-            <img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
-        <a href="{% url 'create_botanical' %}">
-            <img src="{% static 'svg/register_botanic.svg' %}" alt="registrar" />Registro</a>
-        <a href="#">
-            <img src="{% static 'svg/settings.svg' %}" alt="Configuracoes" />Configurações</a>
-        <a href="{% url 'login' %}">
-            <img src="{% static 'svg/logout.svg' %}" alt="Sair" />Sair</a>
+        <a href="{% url 'catalog' %}"><img src="{% static 'svg/home.svg' %}" alt="home" />Catálogo</a>
+        <a href="{% url 'create_botanical' %}"><img src="{% static 'svg/register_botanic.svg' %}"
+                alt="registrar" />Registro</a>
+        <a href="#"><img src="{% static 'svg/settings.svg' %}" alt="Configurações" />Configurações</a>
+        <a href="{% url 'login' %}"><img src="{% static 'svg/logout.svg' %}" alt="Sair" />Sair</a>
     </aside>
+
     <div class="main">
         <header>
-            <h1>Ficha Botânica</h1>
-
-            <div class="text-end">
-                <button type="submit" class="btn btn-success">Fazer Registro</button>
-            </div>
+            <h1>Novo Registro</h1>
         </header>
 
         <div class="content">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <section class="info"=>
-                    <h3><img src="{% static 'svg/info.svg' %}" width="30px" alt="Info" />Identificação
-                        Botânica</h3>
-                    <div class="row g-3">
+                <section class="info">
+                    <h3><img src="{% static 'svg/florest.svg' %}" width="30px" alt="Info" />Identificação Botânica</h3>
+                    <div class="row">
                         <div class="col-md-6">
                             <label class="form-label">Nome Binomial</label>
                             {{ form.binomial }}
@@ -154,9 +163,9 @@
                     </div>
                 </section>
 
-                <section class="mb-5">
-                    <h3 class="mb-3"><img src="{% static 'svg/info.svg' %}" width="30px" alt="Info" />Morfologia</h3>
-                    <div class="row g-3">
+                <section>
+                    <h3><img src="{% static 'svg/eco.svg' %}" width="30px" alt="Info" />Morfologia</h3>
+                    <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Altura</label>
                             {{ form.height }}
@@ -196,10 +205,9 @@
                     </div>
                 </section>
 
-                <!-- 🏞️ Dados Ambientais -->
-                <section class="mb-5">
-                    <h3 class="mb-3">🏞️ Dados Ambientais</h3>
-                    <div class="row g-3">
+                <section>
+                    <h3><img src="{% static 'svg/climate.svg' %}" width="30px" alt="Info" />Dados Ambientais</h3>
+                    <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Tipo de Solo</label>
                             {{ form.soil_type }}
@@ -227,10 +235,9 @@
                     </div>
                 </section>
 
-                <!-- 🌱 Cultivo -->
-                <section class="mb-5">
-                    <h3 class="mb-3">🌱 Cultivo</h3>
-                    <div class="row g-3">
+                <section>
+                    <h3><img src="{% static 'svg/cultivo.svg' %}" width="30px" alt="Info" />Cultivo</h3>
+                    <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Requisito de Água</label>
                             {{ form.water_requirement }}
@@ -243,14 +250,8 @@
                             <label class="form-label">Tipo de Fertilização</label>
                             {{ form.fertilization_type }}
                         </div>
-                        <div class="col-md-4 d-flex align-items-center">
-                            <div class="form-check">
-                                {{ form.need_for_pruning }}
-                                <label class="form-check-label">Necessita Poda</label>
-                            </div>
-                        </div>
                         <div class="col-12">
-                            <label class="form-label">Susceptibilidade</label>
+                            <label class="form-label">Sustentabilidade</label>
                             {{ form.susceptibility }}
                         </div>
                         <div class="col-12">
@@ -260,10 +261,9 @@
                     </div>
                 </section>
 
-                <!-- 📍 Localização -->
-                <section class="mb-5">
-                    <h3 class="mb-3">📍 Localização</h3>
-                    <div class="row g-3">
+                <section>
+                    <h3><img src="{% static 'svg/loc.svg' %}" width="30px" alt="Info" />Localização</h3>
+                    <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">País</label>
                             {{ form.country }}
@@ -303,10 +303,9 @@
                     </div>
                 </section>
 
-                <!-- 📅 Datas -->
-                <section class="mb-5">
-                    <h3 class="mb-3">📅 Datas</h3>
-                    <div class="row g-3">
+                <section>
+                    <h3><img src="{% static 'svg/calendar.svg' %}" width="30px" alt="Info" />Datas</h3>
+                    <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Data de Registro</label>
                             {{ form.registration_date }}
@@ -322,10 +321,9 @@
                     </div>
                 </section>
 
-                <!-- 🌎 Origem e Coleta -->
-                <section class="mb-5">
-                    <h3 class="mb-3">🌎 Origem e Coleta</h3>
-                    <div class="row g-3">
+                <section>
+                    <h3><img src="{% static 'svg/globe.svg' %}" width="30px" alt="Info" />Origem e Coleta</h3>
+                    <div class="row">
                         <div class="col-md-6">
                             <label class="form-label">Origem</label>
                             {{ form.origin }}
@@ -341,6 +339,35 @@
                     </div>
                 </section>
 
+                <section>
+                    <h3><img src="{% static 'svg/photo.svg' %}" width="30px" alt="Info" />Imagens</h3>
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label">Imagem Geral</label>
+                            {{ form.general_image }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Caule</label>
+                            {{ form.stem_image }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Folha</label>
+                            {{ form.leaf_image }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Flor</label>
+                            {{ form.flower_image }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Fruto</label>
+                            {{ form.fruit_image }}
+                        </div>
+                    </div>
+                </section>
+
+                <div class="create">
+                    <button type="submit" class="btn btn-success">Fazer Registro</button>
+                </div>
             </form>
         </div>
     </div>
