@@ -9,10 +9,12 @@ Web application developed with Django, integrated with SQLite, to manage and reg
 - Plant registration and editing with detailed botanical data
 - Geographic location recording via GPS coordinates
 - Photo upload and management for plants
-- Advanced search and filtering by species, location, and status
-- Life cycle tracking and event monitoring (flowering, pruning, etc.)
-- Support for multiple users with different permission levels
 - Efficient CRUD aligned with all the system's operational logic
+
+## Updates
+- Advanced search and filtering by species, location, and status
+- Life cycle monitoring and event monitoring (flowering, pruning, etc.)
+- Support for multiple users with different permission levels
 
 ## Technologies and Dependencies
 - Backend: Django 5.x
