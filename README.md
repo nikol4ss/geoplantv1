@@ -11,7 +11,7 @@ This project is a web application developed with Django and SQLite to manage pla
 1. Clone the repository
 ```bash
 git clone https://github.com/user/geoplantv1.git
-cd geo-plant
+cd geoplantv1
 ```
 
 2. Create and activate the virtual environment:
